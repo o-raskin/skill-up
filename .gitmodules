@@ -1,0 +1,12 @@
+[submodule "su-ui"]
+	path = su-ui
+	url = https://github.com/o-raskin/su-ui
+[submodule "su-skills"]
+	path = su-skills
+	url = https://github.com/o-raskin/su-skills
+[submodule "su-registry"]
+	path = su-registry
+	url = https://github.com/o-raskin/su-registry
+[submodule "su-gateway"]
+	path = su-gateway
+	url = https://github.com/o-raskin/su-gateway

@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+
+  #=== UI ===#
+
+
+
+  #=== REGISTRY ===#
+
+  registry:
+    container_name: registry
+    image: su-registry:1.0.0-RELEASE
+    ports:
+      - 8761:8761
+
+  #=== GATEWAY ===#
+
+  # gateway:
+  #   container_name: su-gateway
+  #   image: su-gateway:1.0.0-RELEASE
+  #   ports:
+  #     - 8099:8099
+  #   environment:
+  #     - INIT_DELAY=10
+  #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://registry:8761/eureka 
+
+ gateway-psql:
+    container_name: psql-gateway
+    image: postgres:10.4
+    ports:
+      - 5441:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+    volumes:
+      - psql_employee:/var/lib/postgresql/data
+
+  #=== SKILL ===#
+
+  # skills:
+  #   container_name: skills
+  #   image: su-skills:1.0.0
+
+  skill-psql:
+    container_name: psql-skill
+    image: postgres:10.4
+    ports:
+      - 5441:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+    volumes:
+      - psql_employee:/var/lib/postgresql/data
+
+  #=== EMPLOYER ===#
+
+
+
+  #=== RABBIT MQ ===#
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - 15672:15672/tcp
+      - 5672:5672/tcp
+    restart: on-failure:5
+    hostname: su-rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_VHOST=/
+    volumes:
+      - rabbitmq_data_dev:/var/lib/rabbitmq
+
+volumes:
+  psql_employee:
+    driver: local
+  # psql_employer:
+  #   driver: local
+  rabbitmq_data_dev:
+    driver: local
