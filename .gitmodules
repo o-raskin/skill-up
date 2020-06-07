@@ -10,3 +10,6 @@
 [submodule "su-gateway"]
 	path = su-gateway
 	url = https://github.com/o-raskin/su-gateway
+[submodule "skillup-planning"]
+	path = skillup-planning
+	url = https://github.com/o-raskin/su-planning

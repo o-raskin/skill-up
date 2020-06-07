@@ -39,7 +39,7 @@ services:
     volumes:
       - psql_sugateway:/var/lib/postgresql/data
 
-  #=== SKILL ===#
+  #=== SKILLS ===#
 
   # skills:
   #   container_name: skills
@@ -56,9 +56,22 @@ services:
     volumes:
       - psql_suskill:/var/lib/postgresql/data
 
-  #=== EMPLOYER ===#
+  #=== PLANNING ===#
 
+  # planning:
+  #   container_name: planning
+  #   image: su-planning:1.0.0
 
+  planning-psql:
+    container_name: psql-planning
+    image: postgres:10.4
+    ports:
+      - 5443:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+    volumes:
+      - psql_suplanning:/var/lib/postgresql/data
 
   #=== RABBIT MQ ===#
 
@@ -81,6 +94,8 @@ volumes:
   psql_sugateway:
     driver: local
   psql_suskill:
+    driver: local
+  psql_suplanning:
     driver: local
   rabbitmq_data_dev:
     driver: local
